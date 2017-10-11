@@ -7,14 +7,17 @@ module.exports = NodeHelper.create({
         this.expressApp.get('/browser', (req, res) => {
 
             var query = url.parse(req.url, true).query;
+            var search = query.search;
 
-            var id = query.id;
+            console.log(url);
+            console.log(query);
+            console.log(search);
 
-            if (id == null){
-                res.send({"status": "failed", "error": "No id given."});
+            if (search == null){
+                res.send({"status": "failed", "error": "No search given."});
             } else {
-                this.sendSocketNotification("NEW_SEARCH", id);
-                res.send({"status": "success", "payload": id});
+                this.sendSocketNotification("NEW_SEARCH", search);
+                res.send({"status": "success", "payload": search});
             }
         });
     }
